@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Importorders list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Createdat</th>
+                <th>File</th>
+                <th>Shopid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for importOrder in importOrders %}
+            <tr>
+                <td><a href="{{ path('orders_show', { 'id': importOrder.id }) }}">{{ importOrder.id }}</a></td>
+                <td>{% if importOrder.createdAt %}{{ importOrder.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ importOrder.file }}</td>
+                <td>{{ importOrder.shopId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('orders_show', { 'id': importOrder.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('orders_edit', { 'id': importOrder.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('orders_new') }}">Create a new importOrder</a>
+        </li>
+    </ul>
+{% endblock %}

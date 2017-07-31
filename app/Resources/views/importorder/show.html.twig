@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Importorder</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ importOrder.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if importOrder.createdAt %}{{ importOrder.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ importOrder.file }}</td>
+            </tr>
+            <tr>
+                <th>Shopid</th>
+                <td>{{ importOrder.shopId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('orders_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('orders_edit', { 'id': importOrder.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
