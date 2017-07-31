@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Exportproducts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Crée le</th>
+                <th>Fichier</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exportProduct in exportProducts %}
+            <tr>
+                
+                <td>{% if exportProduct.createdAt %}{{ exportProduct.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ exportProduct.file }}</td>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
