@@ -42,7 +42,7 @@ class ExportProductController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $exportProducts = $em->getRepository('AppBundle:ExportProduct')->findAll();
-
+        
         $shop = "testshop";
         $json = '{
             "products": [
@@ -285,11 +285,11 @@ class ExportProductController extends Controller
 
         $fp = fopen($csvFileName, 'w');
 
-
-
         foreach($data['products'] as $product)
         {
-
+            $header = "id-produit|code-ean|denomination-concise|denomination-subjective|description-concise|description-complète|url-article|url-photo1|url-photo2|url-photo3|url-photo4|url-photo5|marque|genre|classification|id-reference|disponibilite|statut-de-disponibilite|prix-ttc|ecotaxe|retractation|quantite|delai-de-reappro|delai-de-livraison|unite-delai-de-livraison|delai-d-expedition|unite-delai-d-expedition|frais-de-port|description-livraison|prix-public-generalement-constate|mots-clefs|date-heure-de-debut-promotion|date-heure-de-fin-promotion|prix-ttc-avant-promotion|promotion|pourcentage-de-la-remise|prix-remise|type-de-promotion|garantie|message-promotionnel|couleur|taille|matiere| \r\n";
+            $datafile = file_get_contents($csvFileName);
+            file_put_contents($csvFileName, $header.$datafile);
 
             foreach($product['variants'] as $variant)
 
@@ -297,12 +297,50 @@ class ExportProductController extends Controller
              {
 
                 $line = array();
-                $line['product_id'] = $product['id'];
-                $line['porduct_title'] = $product['title'];
-                $line['variant_title'] = $variant['title'];
-                $line['porduct_sku'] = $variant['sku'];
-                $line['image-id'] = $image['id'];
-                $line['src-image'] = $image['src'];
+                
+
+                $line['id_produit'] = $product['id'];
+                $line['code_ean'] = $variant['barcode'];
+                $line['denomination-concise'] = '';
+                $line['denomination-subjective'] = '';
+                $line['description-concise'] = '';
+                $line['description-complète'] = $product['body_html'];
+                $line['url-article'] = '';
+                $line['url-photo'] = $image['src'];
+                $line['marque'] = '';
+                $line['genre'] = '';
+                $line['classification'] = '';
+                $line['id-reference'] = '';
+                $line['disponibilite'] = '';
+                $line['statut-de-disponibilite'] = '';
+                $line['prix-ttc'] = $variant['price'];
+                $line['ecotaxe'] = $variant['taxable'];
+                $line['retractation'] = '';
+                $line['quantite'] = $variant['inventory_quantity'];
+                $line['delai-de-reappro'] = '';
+                $line['delai-de-livraison'] = '';
+                $line['unite-delai-de-livraison'] = '';
+                $line['delai-d-expedition'] = '';
+                $line['unite-delai-d-expedition'] = '';
+                $line['frais-de-port'] = '';
+                $line['description-livraison'] = '';
+                $line['prix-public-generalement-constate'] = '';
+                $line['mots-clefs'] = $product['tags'];
+                $line['date-heure-de-debut-promotion'] = '';
+                $line['date-heure-de-fin-promotion'] = '';
+                $line['prix-ttc-avant-promotion'] = '';
+                $line['promotion'] = '';
+                $line['pourcentage-de-la-remise'] = '';
+                $line['prix-remise'] = '';
+                $line['type-de-promotion'] = '';
+                $line['garantie'] = '';
+                $line['message-promotionnel'] = '';
+                $line['couleur'] = $variant['title'];
+                $line['taille'] = '';
+                $line['matiere'] = '';
+                //$line[''] = '';
+
+    
 
                 echo '<pre>';
                 print_r(($line));
@@ -310,8 +348,8 @@ class ExportProductController extends Controller
                 echo '</pre>';
 
 
-
-                fputcsv($fp , $line, "|");
+                
+                fputcsv($fp ,$line, "|");
 
             }
         }

@@ -1,0 +1,12 @@
+ul li {
+	list-style: none;
+}
+.element-top-20 {
+    margin-top: 20px;
+}
+.element-top-20 {
+    margin-top: 10px;
+}
+.fa-input {
+  font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
