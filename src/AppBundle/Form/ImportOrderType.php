@@ -15,8 +15,9 @@ class ImportOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('createdAt')
-        ->add('file', FileType::class, array('label' => 'File'))
-        ->add('shopId');
+        ->add('file', FileType::class, array('label' => 'File'), null, array('attr' => array('class' => 'btn btn-primary'),))
+        ->add('shopId', null, array('attr' => array('class' => 'form-control'),));
+
     }
     
     /**

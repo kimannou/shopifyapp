@@ -42,7 +42,7 @@ class ImportOrderController extends Controller
         $importOrder = new Importorder();
         $form = $this->createForm('AppBundle\Form\ImportOrderType', $importOrder);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {$file = $importOrder->getFile();
 
             $file = $importOrder->getFile();
@@ -62,7 +62,7 @@ class ImportOrderController extends Controller
             $em->persist($importOrder);
             $em->flush();
 
-            return $this->redirectToRoute('orders_show', array('id' => $importOrder->getId()));
+           // return $this->redirectToRoute('orders_show', array('id' => $importOrder->getId()));
         }
 
         return $this->render('importorder/new.html.twig', array(
