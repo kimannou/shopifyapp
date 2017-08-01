@@ -42,9 +42,9 @@ class ImportOrderController extends Controller
         $importOrder = new Importorder();
         $form = $this->createForm('AppBundle\Form\ImportOrderType', $importOrder);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {$file = $importOrder->getFile();
+        if ($form->isSubmitted() && $form->isValid()) {
 
+            $shopid = "123456";
             $file = $importOrder->getFile();
             // Generate a unique name for the file before saving it
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -58,11 +58,13 @@ class ImportOrderController extends Controller
             // Update the 'brochure' property to store the PDF file name
             // instead of its contents
             $importOrder->setFile($fileName);
+            $importOrder->setShopId($shopid);
+            $importOrder->setCreatedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($importOrder);
             $em->flush();
 
-           // return $this->redirectToRoute('orders_show', array('id' => $importOrder->getId()));
+            return $this->redirectToRoute('orders_index');
         }
 
         return $this->render('importorder/new.html.twig', array(

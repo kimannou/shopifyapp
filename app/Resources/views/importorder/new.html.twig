@@ -1,19 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Importorder creation</h1>
+    <h1>order creation</h1>
 
-    {{ form_start(form.file) }}
-        {{ form_widget(form.file) }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
 
-        <div class="col-md-1">
-            <input  class="btn btn-lg btn-primary fa fa-plus element-top-20" type="submit" value="&#xf067; Create" />
-        </div>
-    {{ form_end(form.file) }}
-
-    <ul>
-        <li class="col-md-1">
-            <a  class="btn btn-default element-top-20" href="{{ path('orders_index') }}"><i class="fa fa-reply" aria-hidden="true"></i> Back to the list</a>
-        </li>
-    </ul>
+   
 {% endblock %}
