@@ -15,7 +15,11 @@
                 <tr>
                     
                     <td>{% if exportProduct.createdAt %}{{ exportProduct.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ exportProduct.file }}</td>
+                    <td> 
+						<a href="{{ app.request.getBaseURL() }}/{{ exportProduct.file }}" target="_blank">
+							<i class="fa fa-fw fa-download"></i> Télcharger
+						</a>
+					</td>
                     
                 </tr>
             {% endfor %}
