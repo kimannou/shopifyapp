@@ -15,11 +15,13 @@
         <tbody>
         {% for exportShipping in exportShippings %}
             <tr>
-                
-                
-                <td>{% if exportShipping.createdAt %}{{ exportShipping.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ exportShipping.file }}</td>
-               
+                          
+			   <td>{% if exportShipping.createdAt %}{{ exportShipping.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td> 
+						<a href="{{ app.request.getBaseURL() }}/{{ exportShipping.file }}" target="_blank">
+							<i class="fa fa-fw fa-download"></i> Télcharger
+						</a>
+					</td>
             </tr>
         {% endfor %}
         </tbody>
